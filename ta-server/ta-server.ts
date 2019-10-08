@@ -24,38 +24,31 @@ taserver.get('/alunos', function (req: express.Request, res: express.Response) {
 })
 
 taserver.post('/aluno', function (req: express.Request, res: express.Response) {
-    var aluno: any = <Aluno> req.body; //verificar se é mesmo Aluno!
-    aluno = cadastro.cadastrar(aluno);
-    if (aluno.cpfRepetido || aluno.loginRepetido) {
-        var strCpfRepetido = (aluno.cpfRepetido) ? "true" : "false",
-            strLoginRepetido = (aluno.loginRepetido) ? "true" : "false"; 
-        res.send({"failure": "Aluno já foi cadastrado", "motivo": {"cpfRepetido": strCpfRepetido, "loginRepetido": strLoginRepetido}});
-    }
-    else{
-      res.send({"success": "O aluno foi cadastrado com sucesso"});
-    }
-})
-
-taserver.delete('/aluno', function (req: express.Request, res: express.Response){
-    var id = req.query.id;
-    var result = cadastro.deletar(""+id);
-    if (result){
-        res.send({"success": "O aluno foi deletado com sucesso"});
-    }else{
-        res.send({"failure": "O aluno não pode ser deletado"});
-    }
+  var aluno: Aluno = <Aluno> req.body; //verificar se é mesmo Aluno!
+  aluno = cadastro.cadastrar(aluno);
+  if (aluno) {
+    res.send({"success": "O aluno foi cadastrado com sucesso"});
+  } else {
+    res.send({"failure": "O aluno não pode ser cadastrado"});
+  }
 })
 
 taserver.put('/aluno', function (req: express.Request, res: express.Response) {
-    var aluno: Aluno = <Aluno> req.body;
-    aluno = cadastro.atualizar(aluno);
-    if (aluno) {
-        res.send({"success": "O aluno foi atualizado com sucesso"});
-    } else {
-        res.send({"failure": "O aluno não pode ser atualizado"});
-    }
+  var aluno: Aluno = <Aluno> req.body;
+  aluno = cadastro.atualizar(aluno);
+  if (aluno) {
+    res.send({"success": "O aluno foi atualizado com sucesso"});
+  } else {
+    res.send({"failure": "O aluno não pode ser atualizado"});
+  }
 })
 
-taserver.listen(3000, function () {
-    console.log('Example app listening on port 3000!')
+var server = taserver.listen(3000, function () {
+  console.log('Example app listening on port 3000!')
 })
+
+function closeServer(): void {
+  server.close();
+}
+
+export { server, closeServer }
