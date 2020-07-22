@@ -8,11 +8,12 @@ import { NgModule } from '@angular/core';
 })
 export class AppComponent {
   title: 'ta-gui';
-  aluno: Aluno = {nome: "", cpf: "", email: ""};
+  aluno: Aluno = {nome: "Andre", cpf: "114", email: "alpvj@", login: ""};
 }
 
 export class Aluno {
   nome: string;
   cpf: string;
   email: string;
+  login: string;
 }
