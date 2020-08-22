@@ -1,25 +1,10 @@
-nav a {
-    padding: 3px 6px;
-    text-decoration: none;
-    display: inline-block;
-    background-color: #3399ff;
-    color: #ffffff;
-    border-radius: 4px;
-    margin: 4px;
-}
-
-nav a:hover {
-    color: #e6e6e6;
-    background-color: #1a8cff;
-}
-
 .alunos {
     margin: 0 0 2em 0;
     list-style-type: none;
     padding: 0;
     width: 15em;
 }
-  
+
 .alunos li {
     cursor: pointer;
     position: relative;
@@ -31,6 +16,13 @@ nav a:hover {
     border-radius: 4px;
 }
 
+.rmv button{
+    background-color: rgb(170, 9, 9);
+}
+.rmv button:hover {
+    background-color: #cfd8dc;
+}
+
 button {
     font-family: Arial;
     background-color: green;
@@ -40,7 +32,6 @@ button {
     cursor: pointer;
     cursor: hand;
 }
-
 button:hover {
     background-color: #cfd8dc;
-}
+} 
