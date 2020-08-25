@@ -44,14 +44,44 @@ describe("O cadastro de alunos", () => {
   it("remover aluno cadastrado", () => {
     cadastrarAluno("Mariana","683");
 
-    expect(cadastro.getAlunos().length).toBe(1);
-    var aluno = cadastro.getAlunos()[0];
+    var aluno = expectSoUmAluno();
     expect(aluno.nome).toBe("Mariana");
     expect(aluno.cpf).toBe("683");
     expect(aluno.email).toBe("");
     expect(aluno.metas.size).toBe(0);
 
     cadastro.deletar(aluno.cpf);
+    expect(cadastro.getAlunos().length).toBe(0);
+  })
+
+  it("atualizar aluno cadastrado", () => {
+    cadastrarAluno("Mariana","683");
+
+    var aluno = expectSoUmAluno();
+    expect(aluno.nome).toBe("Mariana");
+    expect(aluno.cpf).toBe("683");
+    expect(aluno.email).toBe("");
+    expect(aluno.metas.size).toBe(0);
+
+    var aluno_copy : Aluno = new Aluno();
+    aluno_copy.copyFrom(aluno);
+    aluno_copy.nome = "Pedro";
+    aluno_copy.email = "pedro@gmail.com";
+    cadastro.atualizar(aluno_copy);
+
+    aluno = cadastro.getAlunos()[0];
+    expect(aluno.nome).toBe("Pedro");
+    expect(aluno.cpf).toBe("683");
+    expect(aluno.email).toBe("pedro@gmail.com");
+    expect(aluno.metas.size).toBe(0);
+  })
+
+  it("atualizar aluno não cadastrado", () => {
+    expect(cadastro.getAlunos().length).toBe(0);
+    var aluno : Aluno = new Aluno();
+    aluno.nome = "Mariana";
+    aluno.cpf = "683";
+    cadastro.atualizar(aluno);
     expect(cadastro.getAlunos().length).toBe(0);
   })
 })
