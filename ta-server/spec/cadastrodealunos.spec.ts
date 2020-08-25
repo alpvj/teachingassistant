@@ -1,5 +1,5 @@
 import { CadastroDeAlunos } from '../cadastrodealunos';
-import { Aluno } from '../../common/aluno';
+import { Aluno } from '../common/aluno';
 
 describe("O cadastro de alunos", () => {
   var cadastro: CadastroDeAlunos;
@@ -36,6 +36,23 @@ describe("O cadastro de alunos", () => {
     cadastro.cadastrar(aluno);
 
     expect(cadastro.getAlunos().length).toBe(1);
+  })
+
+  it("remover aluno cadastrado", () => {
+    var aluno: Aluno = new Aluno();
+    aluno.nome = "Mariana";
+    aluno.cpf = "683";
+    cadastro.cadastrar(aluno);
+
+    expect(cadastro.getAlunos().length).toBe(1);
+    aluno = cadastro.getAlunos()[0];
+    expect(aluno.nome).toBe("Mariana");
+    expect(aluno.cpf).toBe("683");
+    expect(aluno.email).toBe("");
+    expect(aluno.metas.size).toBe(0);
+
+    cadastro.deletar(aluno.cpf);
+    expect(cadastro.getAlunos().length).toBe(0);
   })
 
 })
