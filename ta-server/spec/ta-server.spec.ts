@@ -32,10 +32,10 @@ describe("O servidor", () => {
 
 
   it("não cadastra alunos com CPF duplicado", () => {
-    var aluno1 = {"json":{"nome": "Mari", "cpf" : "965", "email":""}};
-    var aluno2 = {"json":{"nome": "Pedro", "cpf" : "965", "email":""}};
-    var resposta1 = '{"nome":"Mari","cpf":"965","email":"","metas":{}}';
-    var resposta2 = '{"nome":"Pedro","cpf":"965","email":"","metas":{}}';
+    var aluno1 = {"json":{"nome": "Mari", "cpf" : "965", "email":"", "login":"ma"}};
+    var aluno2 = {"json":{"nome": "Pedro", "cpf" : "965", "email":"", "login":"pe"}};
+    var resposta1 = '{"nome":"Mari","cpf":"965","email":"","login":"ma","metas":{}}';
+    var resposta2 = '{"nome":"Pedro","cpf":"965","email":"","login":"pe","metas":{}}';
 
     return request.post(base_url + "aluno", aluno1)
              .then(body => {
@@ -54,5 +54,6 @@ describe("O servidor", () => {
                  expect(err).toEqual(null)
               });
  })
+
 
 })

@@ -24,12 +24,12 @@ taserver.get('/alunos', function (req: express.Request, res: express.Response) {
 })
 
 taserver.post('/aluno', function (req: express.Request, res: express.Response) {
-  var aluno: Aluno = <Aluno> req.body; //verificar se é mesmo Aluno!
+  var aluno: any = <Aluno> req.body; //verificar se é mesmo Aluno!
   aluno = cadastro.cadastrar(aluno);
-  if (aluno) {
-    res.send({"success": "O aluno foi cadastrado com sucesso"});
-  } else {
+  if (aluno==null || aluno.cpfRepetido || aluno.loginRepetido) {
     res.send({"failure": "O aluno não pode ser cadastrado"});
+  } else {
+    res.send({"success": "O aluno foi cadastrado com sucesso"});
   }
 })
 

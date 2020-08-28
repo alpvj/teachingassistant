@@ -5,6 +5,9 @@ export class CadastroDeAlunos {
 
     cadastrar(aluno: Aluno): any {
         var result = null;
+        //Checar se aluno tem todos os campos
+        if (aluno == undefined || aluno.nome == undefined || aluno.cpf == undefined || aluno.email == undefined || aluno.login == undefined)
+            return result;
         if (this.cpfNaoCadastrado(aluno.cpf) && this.loginNaoCadastrado(aluno.login)) {
             result = new Aluno();
             result.copyFrom(aluno);
